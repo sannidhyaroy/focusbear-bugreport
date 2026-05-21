@@ -632,3 +632,18 @@ The surprise is the problem, not the behavior. For the target audience, neurodiv
 
 **Suggested Fix:**
 During routine setup, before the user adds their first habit, a single line of contextual information would be sufficient: "Heads up: while your routine is active, other features like Focus Sessions and Todo List will be paused until you complete all habits." This is not a redesign. It is one sentence at the right moment.
+
+### UX-03: Simple/Geek Mode Toggle Has Global Impact But Appears Local to Settings
+
+**Description:**
+The Simple/Geek Mode toggle appears persistently in the top right corner of every Settings page. Visually, this reads as a local view filter, which is a standard macOS pattern where controls in this position affect only the current view, similar to list/grid toggles in Finder or view options in other apps. However, the toggle actually has global impact, changing the UI and available options across other parts of the app including the `Start Focus Session` screen.
+
+This violates the macOS convention that global controls should live at the app level, in the sidebar, menu bar, or a prominent top-level location that is not embedded in a settings panel where they visually blend with local view controls.
+
+Additionally, within Geek Mode, the `Start Focus Session` screen has its own separate `Show advanced options` toggle that reveals two more options. This creates double gatekeeping: a user must first be in Geek Mode, then also discover and enable a second toggle within that screen to access all available options. A user who has already self-selected into Geek Mode has already signaled they want the full experience and is an advanced user, hence hiding options behind a second toggle inside Geek Mode defeats its purpose.
+
+**Impact:**
+A macOS-familiar user toggling Simple/Geek Mode in Settings may not realize they just changed how other screens in the app behave. Conversely, a user who understands the toggle is global may hesitate to switch modes for fear of unintended consequences elsewhere. Either way, the placement creates confusion. The `Start Focus Session` page being affected by both Geek Mode and `Show advanced options` essentially creates an unnecessary double gatekeeping as well.
+
+**Suggested Fix:**
+Decouple Simple/Geek Mode from the `Start Focus Session` screen entirely. Scope the `Simple/Geek Mode` toggle to Settings only, making it genuinely a local view filter as it visually implies. Replace its impact on the Focus Session screen with the single `Show advanced options` toggle scoped to that screen. When disabled, the Focus Session screen shows the current Simple Mode UI. When enabled, it shows all options currently available when both Geek Mode and the advanced toggle are active. This eliminates the misleading global behavior, removes double gatekeeping for power users, and makes each toggle's scope immediately clear from its placement.
