@@ -436,7 +436,9 @@ All 4 of the first subtasks toggle simultaneously.
 **Suspected Cause:**
 List view recycling issue where the first 4 subtask items share the same view holder state or checkbox binding, causing them to act as a single togglable group.
 
-**Screen Recording:** [BUG-AND-04](https://drive.google.com/file/d/1aknoGTbDVCJkegTAFvpOe3uEHw1RPQbn/view?usp=sharing)
+**Screen Recording:**
+
+https://github.com/user-attachments/assets/fd93d874-b4dd-4490-a000-c5a422319436
 
 ---
 
@@ -460,7 +462,9 @@ Toggle activates on tap.
 **Actual Result:**
 Toggle does not respond. Tapping the row text area activates it instead.
 
-**Screen Recording:** [BUG-AND-05](https://drive.google.com/file/d/1kNrtHhcdG7iM1K-8cmawjRsPMmUkuPWc/view?usp=sharing)
+**Screen Recording:**
+
+https://github.com/user-attachments/assets/0f86644f-08d1-415f-aa24-3f78c6c64e1a
 
 ---
 
