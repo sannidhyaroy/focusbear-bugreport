@@ -33,7 +33,9 @@ These bugs individually look like small issues. Together they suggest the time a
 
 ---
 
-## macOS
+## Platform: macOS
+
+---
 
 ### BUG-MAC-01: Focus Session Block List Selection is Wrong Entry (Geek Mode)
 
@@ -230,7 +232,7 @@ Evening Routine remains interactive after midnight. Habits can be checked off. C
 
 | **Screenshot 1** | **Screenshot 2** |
 | :--------------: | :--------------: |
-| ![BUG-MAC-05](./assets/Screenshot%202026-05-20%20at%201.50.33 AM.png) | ![BUG-MAC-05](./assets/Screenshot%202026-05-20%20at%201.33.56 AM.png) |
+| ![BUG-MAC-05](./assets/Screenshot%202026-05-20%20at%201.50.33 AM.png) | ![BUG-MAC-05](./assets/Screenshot%202026-05-19%20at%201.52.41 AM.png) |
 | *Notice the screen appears after 12 AM (note the time)* | *Clicking on `Start Evening Routine` brings to this page and lets you complete them at midnight* |
 
 **Note:** Since this affects both macOS and Android independently, the bug is likely in shared backend/API time window validation rather than client-side code.
@@ -240,6 +242,7 @@ Evening Routine remains interactive after midnight. Habits can be checked off. C
 ### BUG-MAC-06: Wind Down Screen Triggered 9 Hours Before Tech Curfew
 
 **Severity:** High
+
 **Type:** Time Window / State Management Bug
 
 **Description:**
@@ -264,7 +267,7 @@ This bug surfaces a series of deeper questions about the app's scheduling model 
 6. This only happened once. On normal days finishing evening habits early does not trigger Wind Down. So there is likely an additional condition or race condition that caused this specific instance, but the underlying scheduling model creates the conditions for it to happen
 
 **Steps to Reproduce:**
-Not consistently reproducible. Observed once at 3:03 PM after completing all Evening Routine habits shortly after the routine start time.
+Reproduced twice on consecutive days (20th and 21st May 2026) at approximately 3:03 PM and 3:06 PM, immediately after completing all Evening Routine habits shortly after the 3:00 PM routine start time. The pattern suggests completing all must-do habits immediately after the routine window opens is a consistent trigger for this state.
 
 | **Screenshot** |
 | :------------: |
@@ -281,6 +284,8 @@ See also `UX-02` for the related UX concern around communicating these behaviors
 ## Architectural Observations (macOS)
 
 ### ARCH-01: WebView Per Dashboard Tab
+
+**Severity:** Low
 
 **Type:** Performance Concern
 
@@ -309,6 +314,8 @@ Six separate WebView processes consuming over 1.1GB virtual memory combined.
 
 ### ARCH-02: Excessive Port Usage on Main Process and FBHelper
 
+**Severity:** Medium
+
 **Type:** Performance and Security Concern
 
 **Observation:**
@@ -335,7 +342,11 @@ macOS has a system-wide file descriptor limit. An application holding 1,000+ por
 **Security Impact:**
 Beyond performance, excessive open connections expand the app's attack surface. Each open socket is a potential entry point, and redundant or improperly closed connections may hold authentication tokens in memory longer than necessary. If any connections lack proper TLS or authentication, focus session data, habit data, or credentials could be at risk of interception. FBHelper's 244 open ports are particularly notable given it runs as a persistent background process even when the user believes Focus Bear is fully quit.
 
-## Android (v1.19.0)
+---
+
+## Platform: Android (v1.19.0)
+
+---
 
 ### BUG-AND-01: Focus Logs Not Syncing
 
