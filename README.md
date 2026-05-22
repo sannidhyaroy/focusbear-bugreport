@@ -501,6 +501,34 @@ Race condition between local state and server sync. The app likely displays a ca
 
 ---
 
+### BUG-AND-07: Morning Routine Notification Shows Unformatted [Name] Placeholder
+
+**Severity:** Low-Medium
+
+**Type:** String Interpolation Bug
+
+**Description:**
+The morning routine push notification displays the literal text `[Name]` instead of the user's actual name. The name placeholder is not being substituted with the user's profile name before the notification is sent or displayed.
+
+**Steps to Reproduce:**
+Not consistently reproducible. The morning routine notification uses rotating message variants. The `[Name]` placeholder issue was observed in one specific variant at 6:59 AM on 22nd May 2026. Other notification variants may substitute the name correctly or use different text entirely.
+
+**Expected Result:**
+"Good morning, Sannidhya! It's time to launch..."
+
+**Actual Result:**
+"Good morning, [Name]! It's time to launch..."
+
+| **Screenshot** |
+| :------------: |
+| ![BUG-AND-07](./assets/Screenshot_20260522_070350_One%20UI%20Home.jpg) |
+| *Morning routine notification showing unsubstituted `[Name]` placeholder* |
+
+**Suspected Cause:**
+One or more notification message templates has a `[Name]` placeholder that is not being passed through the name substitution pipeline before sending, while other variants are handled correctly.
+
+---
+
 ## Web ([`dashboard.focusbear.io`](https://dashboard.focusbear.io))
 
 ### BUG-WEB-01: Profile Picture and Description Changes Not Saved
